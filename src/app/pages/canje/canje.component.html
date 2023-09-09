@@ -1,0 +1,79 @@
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+  <div class="container text-center py-5">
+    <h1 class="display-3 text-white mb-4 animated slideInDown">Canje</h1>
+    <nav aria-label="breadcrumb animated slideInDown">
+      <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Canje</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Projects Start -->
+<div class="container-xxl py-5">
+  <div class="container">
+
+    <section class="padded">
+      <!-- Carrito de compras -->
+      <div class="container">
+        <h1 class="text-center">Canjear Recompensas</h1>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card mt-4" *ngFor="let item of listaItemsRecompensas">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-4">
+                    <img [src]="'assets/img/recompensa/' + item.img" alt="" class="img-fluid pe-3 w-5">
+                  </div>
+                  <div class="col-8">
+                    <h5 class="card-title">{{ item.nombre }}</h5>
+                    <p class="card-text">Puntos: {{ item.puntos }}</p>
+                    <div class="col-8">
+                      <!-- ... Código anterior ... -->
+                      <div class="input-group mb-3">
+                        <input type="number" class="form-control" [(ngModel)]="item.cantidad"
+                          (change)="calcularSubtotal(item)">
+                        <span class="input-group-text">Cantidad</span>
+                      </div>
+                      <p class="card-text">Subtotal: {{ item.subtotal }}</p>
+                    </div>
+
+                  </div>
+                </div>
+                <button class="btn btn-primary" (click)="retirarItem(item.idrecompensa)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Recompensas</h5>
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let item of listaItemsRecompensas">{{ item.nombre }}</li>
+                </ul>
+              </div>
+              <div class="card-footer">
+                Total items: {{ totalItems }}
+              </div>
+
+              <div class="card-footer">
+                Total puntos: {{ totalPuntos }}
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-success float-start"(click)="canjearPuntos()">Canjear</button>
+                <button class="btn btn-danger float-end" (click)="vaciarCarrito()">Vaciar Carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end carrito-->
+    </section>
+  </div>
+</div>

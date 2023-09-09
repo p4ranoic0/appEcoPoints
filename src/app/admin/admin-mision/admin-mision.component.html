@@ -1,0 +1,107 @@
+<section id="tabla-mision" class="padded">
+  <div class="container">
+    <h2>Misiones</h2>
+    <p>
+      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseAgregar" role="button" aria-expanded="false"
+        aria-controls="collapseAgregar">
+        Nueva Mision
+      </a>
+
+    </p>
+    <div class="collapse" id="collapseAgregar">
+      <div class="card card-body">
+        <form ngNativeValidate [formGroup]="misionAgregarForm" (ngSubmit)="agregarMision(misionAgregarForm.value)">
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Titulo" formControlName="titulo" required
+              minlength="2">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Descripcion" formControlName="descripcion" required
+              minlength="4">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Puntos" formControlName="puntos" required
+              minlength="1">
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseAgregar">
+              Agregar
+            </button>
+            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAgregar"
+              aria-expanded="false" aria-controls="collapseAgregar">
+              Cerrar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead class="table table-dark">
+        <tr>
+          <th>Cod</th>
+          <th>Titulo</th>
+          <th>Descripcion</th>
+          <th>Puntos</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let filaMision of listaMisiones">
+          <td>{{filaMision.idmisiones}}</td>
+          <td>{{filaMision.titulo}}</td>
+          <td>{{filaMision.descripcion}}</td>
+          <td>{{filaMision.puntos}}</td>
+          <td (click)="editarMision(filaMision)"><a class="btn btn-warning"><fa-icon [icon]="faEdit"
+                data-bs-toggle="modal" data-bs-target="#formulario-actualizar"></fa-icon></a></td>
+          <td (click)="eliminarMision(filaMision)"><a class="btn btn-danger"><fa-icon [icon]="faTimes"></fa-icon></a>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+
+</section>
+<!-- Modal -->
+<div class="modal fade" id="formulario-actualizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar Mision</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form ngNativeValidate [formGroup]="misionActualizarForm"
+        (ngSubmit)="actualizarMision(misionActualizarForm.value)" *ngIf="misionActualizar">
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="idmisiones"
+              [(ngModel)]="misionActualizar.idmisiones" readonly>
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Titulo" formControlName="titulo"
+              [(ngModel)]="misionActualizar.titulo" required minlength="2">
+          </div>
+          <div class="mb-3">
+            <textarea type="text" class="form-control" placeholder="Descripcion" formControlName="descripcion"
+              [(ngModel)]="misionActualizar.descripcion" required minlength="4"></textarea>
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Puntos" formControlName="puntos"
+              [(ngModel)]="misionActualizar.puntos" required minlength="1">
+          </div>
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="botonCerrar">Close</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

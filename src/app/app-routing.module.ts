@@ -1,10 +1,37 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
+import { InicioComponent } from './pages/inicio/inicio.component';
+import { AcercaComponent } from './pages/acerca/acerca.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { CanjeComponent } from './pages/canje/canje.component';
+import { RecompensasComponent } from './pages/recompensas/recompensas.component';
+import { MisionesComponent } from './pages/misiones/misiones.component';
+import { AdminMisionComponent } from './admin/admin-mision/admin-mision.component';
+import { AdminRecompensaComponent } from './admin/admin-recompensa/admin-recompensa.component';
+import { AdminUsuariosComponent } from './admin/admin-usuarios/admin-usuarios.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: 'inicio', component: InicioComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'acerca', component: AcercaComponent },
+  { path: 'canje', component: CanjeComponent },
+  { path: 'contacto', component: ContactoComponent },
+  { path: 'recompensas', component: RecompensasComponent },
+  { path: 'misiones', component: MisionesComponent },
+  { path: 'contacto', component: ContactoComponent },
+  { path: 'adminusuarios', component: AdminUsuariosComponent },
+  { path: 'adminrecompensa', component: AdminRecompensaComponent },
+  { path: 'adminmision', component: AdminMisionComponent },
+
+  { path: '**', redirectTo: 'inicio' }, // Redirige a la página de inicio si la ruta no coincide con ninguna ruta definida
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
